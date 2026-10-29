@@ -1,14 +1,9 @@
 package com.craft;
 
+import lombok.Data;
+
+@Data
 public class Subject {
 
-    private String name;
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void displaySubject() {
-        System.out.println(name);
-    }
+    private String subjectName;
 }

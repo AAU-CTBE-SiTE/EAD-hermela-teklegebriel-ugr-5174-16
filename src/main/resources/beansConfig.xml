@@ -20,8 +20,8 @@
         <property name="subjectName" value="Java EE"/>
     </bean>
 
-    <!-- Student bean: Singleton scope -->
-    <bean id="student" class="com.craft.Student" scope="singleton">
+    <!-- Student bean: Prototype scope -->
+    <bean id="student" class="com.craft.Student" scope="prototype">
         <constructor-arg name="id" value="101"/>
         <constructor-arg name="name" value="John Doe"/>
         <constructor-arg name="age" value="20"/>

@@ -1,8 +1,11 @@
 package com.craft;
 
+import lombok.Data;
+
+@Data
 public class Student {
 
-    public void getHello() {
-        System.out.println("Hello Springers");
-    }
+    private int id;
+    private String name;
+    private int age;
 }

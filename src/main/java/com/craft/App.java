@@ -10,7 +10,7 @@ public class App {
                 new ClassPathXmlApplicationContext("beansConfig.xml");
 
         Student student = context.getBean("student", Student.class);
-        student.getHello();
+        System.out.println(student);
 
         context.close();
     }

@@ -2,7 +2,7 @@ package com.craft;
 
 public class Student {
 
-    public Student() {
-        System.out.println("Student object created");
+    public void getHello() {
+        System.out.println("Hello Springers");
     }
 }

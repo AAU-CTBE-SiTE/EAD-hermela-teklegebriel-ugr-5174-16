@@ -5,10 +5,6 @@
            http://www.springframework.org/schema/beans
            https://www.springframework.org/schema/beans/spring-beans.xsd">
 
-
-    <bean id="student"
-          class="com.craft.Student"
-          scope="prototype"/>
-
+    <bean id="student" class="com.craft.Student"/>
 
 </beans>

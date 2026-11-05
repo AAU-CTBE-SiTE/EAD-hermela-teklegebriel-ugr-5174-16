@@ -1,17 +1,13 @@
 package com.craft;
 
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class App {
-
     public static void main(String[] args) {
-
-        ClassPathXmlApplicationContext context =
-                new ClassPathXmlApplicationContext("beansConfig.xml");
-
+        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
         Student student = context.getBean("student", Student.class);
-        System.out.println(student);
 
-        context.close();
+        System.out.println(student);
     }
 }

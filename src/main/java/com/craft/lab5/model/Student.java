@@ -27,4 +27,9 @@ public class Student {
 
     public double getGrade() { return grade; }
     public void setGrade(double grade) { this.grade = grade; }
+
+    @Override
+    public String toString() {
+        return "Student{id=" + id + ", name='" + name + "', age=" + age + ", grade=" + grade + "}";
+    }
 }

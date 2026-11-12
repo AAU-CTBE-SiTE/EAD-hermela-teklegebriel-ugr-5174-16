@@ -1,68 +1,51 @@
 package com.craft.lab5.controller;
 
 import com.craft.lab5.model.Student;
-
+import com.craft.lab5.service.StudentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/students")
 public class StudentController {
 
-    private final List<Student> students = new ArrayList<>(List.of(
-            new Student(1L, "Hermela", 21, 90.5),
-            new Student(2L, "Abel", 22, 78.0)
-    ));
+    private final StudentService service;
+
+    public StudentController(StudentService service) {
+        this.service = service;
+    }
 
     @GetMapping
-    public List<Student> getAllStudents() {
-        return students;
+    public List<Student> getAll() {
+        return service.getAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Student> getStudentById(@PathVariable Long id) {
-        for (Student student : students) {
-            if (student.getId().equals(id)) {
-                return ResponseEntity.ok(student);
-            }
-        }
-        return ResponseEntity.notFound().build();
+    public Student getById(@PathVariable Long id) {
+        return service.getById(id);
     }
 
     @PostMapping
-    public ResponseEntity<Student> createStudent(@RequestBody Student student) {
-        for (Student existing : students) {
-            if (existing.getId().equals(student.getId())) {
-                return ResponseEntity.status(HttpStatus.CONFLICT).build();
-            }
-        }
-        students.add(student);
-        return ResponseEntity.status(HttpStatus.CREATED).body(student);
+    public ResponseEntity<Student> create(@RequestBody Student student) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.create(student));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Student> updateStudent(@PathVariable Long id, @RequestBody Student updated) {
-        for (Student student : students) {
-            if (student.getId().equals(id)) {
-                student.setName(updated.getName());
-                student.setAge(updated.getAge());
-                student.setGrade(updated.getGrade());
-                return ResponseEntity.ok(student);
-            }
-        }
-        return ResponseEntity.notFound().build();
+    public Student update(@PathVariable Long id, @RequestBody Student student) {
+        return service.update(id, student);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteStudentById(@PathVariable Long id) {
-        boolean removed = students.removeIf(student -> student.getId().equals(id));
-        if (removed) {
-            return ResponseEntity.ok("Student deleted successfully");
-        }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Student not found");
+    public String delete(@PathVariable Long id) {
+        service.delete(id);
+        return "Student deleted successfully";
+    }
+
+    @GetMapping("/average")
+    public double average() {
+        return service.getAverageGrade();
     }
 }
